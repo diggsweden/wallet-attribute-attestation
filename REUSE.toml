@@ -14,6 +14,7 @@ path = [
   ".mvn/settings.xml",
   "**/*/pmd_default_java.xml",
   "README.md",
+  ".gitleaks-test/tests/suite-report-approved.jsonl",
 ]
 precedence = "aggregate"
 SPDX-FileCopyrightText = "2025 diggsweden/wallet-attribute-attestation"

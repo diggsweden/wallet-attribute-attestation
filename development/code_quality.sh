@@ -87,12 +87,12 @@ license() {
 }
 
 commit() {
-  local compareToBranch='main'
+  local compareToBranch="${COMMIT_COMPARE_TO_BRANCH:-main}"
   local currentBranch
   currentBranch=$(git branch --show-current)
   print_header 'COMMIT HEALTH (CONFORM)'
 
-  if [[ "$(git rev-list --count ${compareToBranch}..)" == 0 ]]; then
+  if [[ "$(git rev-list --count "${compareToBranch}"..)" == 0 ]]; then
     printf "%s" "${GREEN} No commits found in current branch: ${YELLOW}${currentBranch}${NC}, compared to: ${YELLOW}${compareToBranch}${NC} ${NC}"
     store_exit_code "$?" "Commit" "${MISSING} ${RED}Commit check count failed, see logs (std out) and fix problems.${NC}\n" "${YELLOW}${CHECKMARK}${CHECKMARK} Commit check skipped, no new commits found in current branch: ${YELLOW}${currentBranch}${NC}\n"
   else

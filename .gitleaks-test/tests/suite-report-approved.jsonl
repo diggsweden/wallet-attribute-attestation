@@ -1,7 +1,3 @@
-# SPDX-FileCopyrightText: 2025 Digg - Agency for Digital Government
-#
-# SPDX-License-Identifier: CC0-1.0
-
 {"RuleID":"digg-email-address","StartLine":5,"EndLine":5,"StartColumn":14,"EndColumn":33,"Match":"super-secret@digg.se","Secret":"super-secret"}
 {"RuleID":"digg-email-address","StartLine":12,"EndLine":12,"StartColumn":2,"EndColumn":25,"Match":"super.secret@foo.digg.se","Secret":"super.secret"}
 {"RuleID":"digg-email-address","StartLine":13,"EndLine":13,"StartColumn":2,"EndColumn":21,"Match":"super.secret@digg.se","Secret":"super.secret"}

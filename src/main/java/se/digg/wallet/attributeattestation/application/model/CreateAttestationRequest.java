@@ -1,0 +1,12 @@
+// SPDX-FileCopyrightText: 2025 diggsweden/wallet-attribute-attestation
+//
+// SPDX-License-Identifier: EUPL-1.2
+
+package se.digg.wallet.attributeattestation.application.model;
+
+import jakarta.validation.constraints.NotNull;
+import java.util.UUID;
+
+public record CreateAttestationRequest(@NotNull(message = "HSM ID cannot be null") UUID hsmId,
+    @NotNull(message = "WUA ID cannot be null") UUID wuaId) {
+}

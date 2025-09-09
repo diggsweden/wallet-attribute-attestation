@@ -173,6 +173,9 @@ SPDX-License-Identifier: EUPL-1.2
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
+        <configuration>
+          <finalName>wallet-attribute-attestation</finalName>
+        </configuration>
       </plugin>
 
       <!-- Formatter plugin -->

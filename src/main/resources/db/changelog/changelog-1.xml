@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+SPDX-FileCopyrightText: 2025 diggsweden/wallet-attribute-attestation
+
+SPDX-License-Identifier: EUPL-1.2
+-->
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.31.xsd"
+  objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS"
+>
+  <changeSet id="20250904-0" author="extern.jesper.hellberg@digg.se">
+    <createTable tableName="attestations">
+      <column name="id" type="UUID">
+        <constraints
+          nullable="false"
+          primaryKey="true"
+          primaryKeyName="pk_attestations"
+        />
+      </column>
+      <column name="hsm_id" type="UUID" />
+      <column name="wua_id" type="UUID" />
+    </createTable>
+  </changeSet>
+</databaseChangeLog>

@@ -23,7 +23,7 @@ import se.digg.wallet.attributeattestation.infrastructure.repostitory.Attestatio
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Testcontainers
-class AttestationIT {
+class AttestationIntegrationTest {
 
   @Container
   @ServiceConnection

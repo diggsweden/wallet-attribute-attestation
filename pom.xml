@@ -1,20 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!--
-SPDX-FileCopyrightText: 2025 diggsweden/wallet-attribute-attestation
-
-SPDX-License-Identifier: EUPL-1.2
--->
+<!-- SPDX-FileCopyrightText: 2025 Digg - Agency for Digital Government -->
+<!-- SPDX-License-Identifier: EUPL-1.2 -->
 <project
   xmlns="http://maven.apache.org/POM/4.0.0"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd"
 >
   <modelVersion>4.0.0</modelVersion>
+
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>3.5.5</version>
-    <!-- lookup parent from repository -->
+    <version>3.5.4</version>
     <relativePath />
   </parent>
   <groupId>se.digg</groupId>
@@ -24,11 +21,20 @@ SPDX-License-Identifier: EUPL-1.2
   <description>Backend service for storing Attribute Attestations</description>
   <url />
   <licenses>
-    <license />
+    <license>
+      <name>EUPL License</name>
+      <url>https://opensource.org/license/eupl-1-2</url>
+      <distribution>repo</distribution>
+    </license>
   </licenses>
+
   <developers>
-    <developer />
+    <developer>
+      <organization>Digg - Agency for Digital Government</organization>
+      <organizationUrl>https://www.digg.se</organizationUrl>
+    </developer>
   </developers>
+
   <scm>
     <connection />
     <developerConnection />
@@ -37,11 +43,16 @@ SPDX-License-Identifier: EUPL-1.2
   </scm>
   <properties>
     <java.version>21</java.version>
+    <maven.compiler.source>${java.version}</maven.compiler.source>
+    <maven.compiler.target>${java.version}</maven.compiler.target>
+
     <formatter-maven-plugin.version>2.26.0</formatter-maven-plugin.version>
     <maven-checkstyle-plugin.version>3.6.0</maven-checkstyle-plugin.version>
     <checkstyle.version>10.25.0</checkstyle.version>
     <record-builder.version>47</record-builder.version>
+    <jreleaser-maven-plugin.version>1.20.0</jreleaser-maven-plugin.version>
   </properties>
+
   <dependencies>
     <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -157,6 +168,11 @@ SPDX-License-Identifier: EUPL-1.2
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
       </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.2.5</version>
+      </plugin>
 
       <!-- Formatter plugin -->
       <plugin>
@@ -177,7 +193,7 @@ SPDX-License-Identifier: EUPL-1.2
         <executions>
           <execution>
             <goals>
-              <goal>format</goal>
+              <goal>validate</goal>
             </goals>
             <phase>verify</phase>
           </execution>
@@ -214,17 +230,15 @@ SPDX-License-Identifier: EUPL-1.2
           </execution>
         </executions>
       </plugin>
+
+      <!-- Release -->
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-failsafe-plugin</artifactId>
-        <executions>
-          <execution>
-            <goals>
-              <goal>integration-test</goal>
-              <goal>verify</goal>
-            </goals>
-          </execution>
-        </executions>
+        <groupId>org.jreleaser</groupId>
+        <artifactId>jreleaser-maven-plugin</artifactId>
+        <version>${jreleaser-maven-plugin.version}</version>
+        <configuration>
+          <configFile>${project.basedir}/jreleaser.yml</configFile>
+        </configuration>
       </plugin>
     </plugins>
   </build>

@@ -1,4 +1,4 @@
-# SPDX-FileCopyrightText: 2025 diggsweden/wallet-attribute-attestation
+# SPDX-FileCopyrightText: 2025 Digg - Agency for Digital Government
 #
 # SPDX-License-Identifier: CC0-1.0
 
@@ -14,10 +14,9 @@ path = [
   ".mvn/settings.xml",
   "**/*/pmd_default_java.xml",
   "README.md",
-  ".gitleaks-test/tests/suite-report-approved.jsonl",
 ]
 precedence = "aggregate"
-SPDX-FileCopyrightText = "2025 diggsweden/wallet-attribute-attestation"
+SPDX-FileCopyrightText = "2025 Digg - Agency for Digital Government"
 SPDX-License-Identifier = "CC0-1.0"
 
 [[annotations]]
@@ -42,6 +41,7 @@ SPDX-License-Identifier = "CC0-1.0"
 path = [
     "mvnw",
     "mvnw.cmd",
+    ".mvn/wrapper/maven-wrapper.jar",
 ]
 precedence = "aggregate"
 SPDX-FileCopyrightText = "Apache Software Foundation (ASF)"

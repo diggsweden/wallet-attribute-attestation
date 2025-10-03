@@ -21,7 +21,7 @@
   <name>wallet-attribute-attestation</name>
   <description>Backend service for storing Attribute Attestations</description>
   <url>https://github.com/diggsweden/wallet-atttribute-attestation</url>
-    <organization>
+  <organization>
     <name>Digg - Agency for Digital Government</name>
     <url>https://www.digg.se</url>
   </organization>
@@ -40,7 +40,7 @@
     </developer>
   </developers>
 
- <scm>
+  <scm>
     <connection>
       scm:git:https://github.com/diggsweden/wallet-atttribute-attestation.git
     </connection>
@@ -51,7 +51,9 @@
   </scm>
   <issueManagement>
     <system>GitHub</system>
-    <url>https://github.com/diggsweden/wallet-atttribute-attestation/issues</url>
+    <url>
+      https://github.com/diggsweden/wallet-atttribute-attestation/issues
+    </url>
   </issueManagement>
   <properties>
     <java.version>21</java.version>

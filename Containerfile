@@ -21,7 +21,7 @@ COPY mvnw pom.xml ./
 RUN chmod +x ./mvnw
 
 # Download dependencies (this layer will be cached if pom.xml doesn't change)
-RUN ./mvnw dependency:go-offline -B
+RUN ./mvnw dependency:resolve dependency:resolve-plugins -B
 
 # Copy source code
 COPY src ./src

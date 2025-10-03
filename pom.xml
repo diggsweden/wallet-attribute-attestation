@@ -14,12 +14,17 @@
     <version>3.5.4</version>
     <relativePath />
   </parent>
-  <groupId>se.digg</groupId>
+  <groupId>se.digg.wallet</groupId>
   <artifactId>wallet-attribute-attestation</artifactId>
   <version>0.0.1-SNAPSHOT</version>
+  <packaging>jar</packaging>
   <name>wallet-attribute-attestation</name>
   <description>Backend service for storing Attribute Attestations</description>
-  <url />
+  <url>https://github.com/diggsweden/wallet-atttribute-attestation</url>
+    <organization>
+    <name>Digg - Agency for Digital Government</name>
+    <url>https://www.digg.se</url>
+  </organization>
   <licenses>
     <license>
       <name>EUPL License</name>
@@ -35,12 +40,19 @@
     </developer>
   </developers>
 
-  <scm>
-    <connection />
-    <developerConnection />
-    <tag />
-    <url />
+ <scm>
+    <connection>
+      scm:git:https://github.com/diggsweden/wallet-atttribute-attestation.git
+    </connection>
+    <developerConnection>
+      scm:git:https://github.com/diggsweden/wwallet-atttribute-attestation.git
+    </developerConnection>
+    <url>https://github.com/diggsweden/wallet-atttribute-attestation</url>
   </scm>
+  <issueManagement>
+    <system>GitHub</system>
+    <url>https://github.com/diggsweden/wallet-atttribute-attestation/issues</url>
+  </issueManagement>
   <properties>
     <java.version>21</java.version>
     <maven.compiler.source>${java.version}</maven.compiler.source>

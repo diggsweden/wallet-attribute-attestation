@@ -1,4 +1,4 @@
-# SPDX-FileCopyrightText: 2025 diggsweden/wallet-attribute-attestation
+# SPDX-FileCopyrightText: 2025 Digg - Agency for Digital Government
 #
 # SPDX-License-Identifier: EUPL-1.2
 
@@ -66,5 +66,3 @@ pnpm-debug.log*
 .npm
 node_modules
 **/megalinter-reports
-
-.gitleaks.test.toml

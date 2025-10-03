@@ -44,4 +44,4 @@ platforms:
 releaseDate: "2025-08-22"
 softwareType: standalone/backend
 softwareVersion: "0.1.0"
-url: "https://github.com/diggsweden/wallet-attribute-attestation.git"
+url: "https://github.com/diggsweden/wallet-client-gateway.git"

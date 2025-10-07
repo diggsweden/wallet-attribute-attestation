@@ -18,10 +18,12 @@ public final class AttestationEntityMapper {
         .id(entity.getId())
         .hsmId(entity.getHsmId())
         .wuaId(entity.getWuaId())
+        .attestationData(entity.getattestationData())
         .build();
   }
 
   public static AttestationEntity toEntity(CreateAttestationRequestDto attestationRequest) {
-    return new AttestationEntity(attestationRequest.hsmId(), attestationRequest.wuaId());
+    return new AttestationEntity(attestationRequest.hsmId(), attestationRequest.wuaId(),
+        attestationRequest.attestationData());
   }
 }

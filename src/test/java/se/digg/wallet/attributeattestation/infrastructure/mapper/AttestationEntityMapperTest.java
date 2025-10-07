@@ -33,7 +33,7 @@ class AttestationEntityMapperTest {
   @Test
   void toEntity() {
     CreateAttestationRequestDto request =
-        new CreateAttestationRequestDto(UUID.randomUUID(), UUID.randomUUID());
+        new CreateAttestationRequestDto(UUID.randomUUID(), UUID.randomUUID(), "a string");
 
     AttestationEntity entity = AttestationEntityMapper.toEntity(request);
 

@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import se.digg.wallet.attributeattestation.application.model.CreateAttestationRequestDto;
 import se.digg.wallet.attributeattestation.domain.model.AttestationDto;
+import se.digg.wallet.attributeattestation.domain.model.AttestationListDto;
 import se.digg.wallet.attributeattestation.domain.service.AttestationService;
-
 
 @RestController
 @RequestMapping("/attestation")
@@ -33,6 +33,14 @@ public class AttestationController {
     return attestationService.getAttestationById(id).map(ResponseEntity::ok)
         .orElse(ResponseEntity.notFound().build());
   }
+
+  @GetMapping("/user/{hsmId}")
+  public ResponseEntity<AttestationListDto> getAttestations(@PathVariable final UUID hsmId) {
+    AttestationListDto dto = new AttestationListDto(
+        attestationService.getAttestationsByHsmId(hsmId), hsmId);
+    return ResponseEntity.ok(dto);
+  }
+
 
   @PostMapping()
   public ResponseEntity<AttestationDto> saveAttestation(

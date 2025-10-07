@@ -11,11 +11,17 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.util.UUID;
 
 @Entity
 @Table(name = "attestations")
 public class AttestationEntity {
+
   @Id
   @GeneratedValue(strategy = GenerationType.UUID)
   private UUID id;
@@ -23,14 +29,21 @@ public class AttestationEntity {
   private UUID hsmId;
   @Column(name = "wua_id")
   private UUID wuaId;
+  @Column(name = "attestation_data")
+  private String attestationData;
+  @Column(name = "created")
+  private Instant created;
 
-  public AttestationEntity() {}
-
-  public AttestationEntity(UUID hsmId, UUID wuaId) {
-    this.hsmId = hsmId;
-    this.wuaId = wuaId;
+  public AttestationEntity() {
+    this.created = Instant.now();
   }
 
+  public AttestationEntity(UUID hsmId, UUID wuaId, String attestationData) {
+    this.hsmId = hsmId;
+    this.wuaId = wuaId;
+    this.created = Instant.now();
+    this.attestationData = attestationData;
+  }
 
   public UUID getId() {
     return id;
@@ -52,7 +65,36 @@ public class AttestationEntity {
     return wuaId;
   }
 
+  public String getattestationData() {
+    return attestationData;
+  }
+
+  public Instant getCreated() {
+    return created;
+  }
+
   public void setWuaId(UUID wuaId) {
     this.wuaId = wuaId;
   }
+
+  public void setattestationData(String attestationData) {
+    this.attestationData = attestationData;
+  }
+
+  public void setCreated(Instant timestamp) {
+    this.created = timestamp;
+  }
+
+  @Transient
+  public LocalDateTime getCreatedDateTime() {
+    return LocalDateTime.ofInstant(created, ZoneId.systemDefault());
+  }
+
+  @Transient
+  public void setCreatedDateTime(LocalDateTime localDateTime) {
+    this.created = localDateTime.toInstant(ZoneOffset.ofHours(1));
+  }
+
+
+
 }

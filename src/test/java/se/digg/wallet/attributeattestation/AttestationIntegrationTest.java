@@ -39,7 +39,7 @@ class AttestationIntegrationTest {
   void getAttestation() {
     UUID hsmID = UUID.randomUUID();
     UUID wuaID = UUID.randomUUID();
-    AttestationEntity entity = new AttestationEntity(hsmID, wuaID);
+    AttestationEntity entity = new AttestationEntity(hsmID, wuaID, "hello world");
 
     repository.save(entity);
 
@@ -54,6 +54,7 @@ class AttestationIntegrationTest {
           assertThat(attestation.hsmId()).isEqualTo(hsmID);
           assertThat(attestation.wuaId()).isEqualTo(wuaID);
           assertThat(attestation.id()).isEqualTo(entity.getId());
+          assertThat(attestation.attestationData()).isEqualTo("hello world");
         });
   }
 
@@ -62,7 +63,7 @@ class AttestationIntegrationTest {
   void createAttestation() {
     UUID hsmID = UUID.randomUUID();
     UUID wuaID = UUID.randomUUID();
-    CreateAttestationRequestDto request = new CreateAttestationRequestDto(hsmID, wuaID);
+    CreateAttestationRequestDto request = new CreateAttestationRequestDto(hsmID, wuaID, "a string");
 
     ResponseEntity<AttestationDto> response =
         restTemplate.postForEntity("/attestation", request, AttestationDto.class);
@@ -75,6 +76,7 @@ class AttestationIntegrationTest {
           assertThat(attestation.hsmId()).isEqualTo(hsmID);
           assertThat(attestation.wuaId()).isEqualTo(wuaID);
           assertThat(attestation.id()).isNotNull();
+          assertThat(attestation.attestationData()).isEqualTo("a string");
         });
   }
 }

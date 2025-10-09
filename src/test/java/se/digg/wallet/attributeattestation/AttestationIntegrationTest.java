@@ -6,6 +6,7 @@ package se.digg.wallet.attributeattestation;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
+import java.time.Instant;
 import java.util.UUID;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,7 @@ import se.digg.wallet.attributeattestation.infrastructure.repostitory.Attestatio
 @Testcontainers
 class AttestationIntegrationTest {
 
+
   @Container
   @ServiceConnection
   static PostgreSQLContainer<?> postgres = SharedPostgresContainer.getContainer();
@@ -39,7 +41,7 @@ class AttestationIntegrationTest {
   void getAttestation() {
     UUID hsmID = UUID.randomUUID();
     UUID wuaID = UUID.randomUUID();
-    AttestationEntity entity = new AttestationEntity(hsmID, wuaID);
+    AttestationEntity entity = new AttestationEntity(hsmID, wuaID, "hello world", Instant.now());
 
     repository.save(entity);
 
@@ -54,6 +56,7 @@ class AttestationIntegrationTest {
           assertThat(attestation.hsmId()).isEqualTo(hsmID);
           assertThat(attestation.wuaId()).isEqualTo(wuaID);
           assertThat(attestation.id()).isEqualTo(entity.getId());
+          assertThat(attestation.attestationData()).isEqualTo("hello world");
         });
   }
 
@@ -62,7 +65,7 @@ class AttestationIntegrationTest {
   void createAttestation() {
     UUID hsmID = UUID.randomUUID();
     UUID wuaID = UUID.randomUUID();
-    CreateAttestationRequestDto request = new CreateAttestationRequestDto(hsmID, wuaID);
+    CreateAttestationRequestDto request = new CreateAttestationRequestDto(hsmID, wuaID, "a string");
 
     ResponseEntity<AttestationDto> response =
         restTemplate.postForEntity("/attestation", request, AttestationDto.class);
@@ -75,6 +78,7 @@ class AttestationIntegrationTest {
           assertThat(attestation.hsmId()).isEqualTo(hsmID);
           assertThat(attestation.wuaId()).isEqualTo(wuaID);
           assertThat(attestation.id()).isNotNull();
+          assertThat(attestation.attestationData()).isEqualTo("a string");
         });
   }
 }

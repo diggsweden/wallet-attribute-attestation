@@ -2,6 +2,8 @@
 #
 # SPDX-License-Identifier: EUPL-1.2
 
+server:
+  port: 8088
 spring:
   application:
     name: wallet-attribute-attestation
@@ -12,12 +14,34 @@ spring:
   datasource:
     driverClassName: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5432/
-    username: postgres
+    username: wallet_attribute_attestation
     role: postgres
-    user: postgres
-    password: test
+    user: wallet_attribute_attestation
+    password: postgres
   liquibase:
     change-log: classpath:db/changelog/changelog-master.xml
   sql:
     init:
       platform: postgres
+# Management and Monitoring
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+      base-path: /actuator
+  endpoint:
+    health:
+      show-details: when-authorized
+      show-components: always
+      probes:
+        enabled: true
+    metrics:
+      enabled: true
+    prometheus:
+      enabled: true
+  health:
+    db:
+      enabled: true
+    diskspace:
+      enabled: true

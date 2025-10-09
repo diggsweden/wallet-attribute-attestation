@@ -4,10 +4,8 @@
 
 package se.digg.wallet.attributeattestation.domain.model;
 
-import io.soabase.recordbuilder.core.RecordBuilder;
+import java.util.List;
 import java.util.UUID;
 
-@RecordBuilder
-public record AttestationDto(UUID id, UUID hsmId, UUID wuaId, String attestationData) {
+public record AttestationListDto(List<AttestationDto> attestations, UUID hsmId) {
 }
-

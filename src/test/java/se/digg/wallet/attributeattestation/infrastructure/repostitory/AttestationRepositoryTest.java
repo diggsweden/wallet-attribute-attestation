@@ -4,10 +4,10 @@
 
 package se.digg.wallet.attributeattestation.infrastructure.repostitory;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
+import java.time.Clock;
+import java.time.Instant;
 import java.util.List;
 import java.util.UUID;
 import org.junit.jupiter.api.Test;
@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
@@ -25,6 +26,11 @@ import se.digg.wallet.attributeattestation.infrastructure.model.AttestationEntit
 @DataJpaTest
 @Testcontainers
 class AttestationRepositoryTest {
+
+  @MockitoBean
+  private Clock clock;
+
+  private Instant fixedInstant = Instant.parse("2023-01-01T12:00:00Z");
 
   @Container
   @ServiceConnection
@@ -37,7 +43,7 @@ class AttestationRepositoryTest {
   TestEntityManager entityManager;
 
   @Test
-  void saveAndRetrieveAttestation() {
+  void saveAndRetrieveAttestationAndTestEquality() {
     UUID hsmID = UUID.randomUUID();
     UUID wuaID = UUID.randomUUID();
     String jwtExample = """
@@ -56,7 +62,8 @@ class AttestationRepositoryTest {
         BrTg0Vf-TGCGNSx3wq
         """;
 
-    AttestationEntity originalEntity = new AttestationEntity(hsmID, wuaID, jwtExample);
+    AttestationEntity originalEntity =
+        new AttestationEntity(hsmID, wuaID, jwtExample, fixedInstant);
 
     repository.save(originalEntity);
 
@@ -65,27 +72,29 @@ class AttestationRepositoryTest {
 
     AttestationEntity foundEntity = repository.findById(originalEntity.getId()).get();
 
-    assertEquals(originalEntity.getId(), foundEntity.getId());
-    assertEquals(originalEntity.getHsmId(), foundEntity.getHsmId());
-    assertEquals(originalEntity.getWuaId(), foundEntity.getWuaId());
-    assertNotNull(originalEntity.getCreated()); // dummy test as I do not mock the clock
-    assertNotNull(originalEntity.getCreatedDateTime());
-    assertEquals(jwtExample, originalEntity.getattestationData());
+    assertThat(foundEntity.getId()).isEqualTo(originalEntity.getId());
+    assertThat(foundEntity.getHsmId()).isEqualTo(originalEntity.getHsmId());
+    assertThat(foundEntity.getWuaId()).isEqualTo(originalEntity.getWuaId());
+    assertThat(foundEntity.getCreated()).isEqualTo(fixedInstant);
+    assertThat(foundEntity.getattestationData()).isEqualTo(jwtExample);
+    assertThat(foundEntity).isEqualTo(originalEntity);
   }
 
   @Test
-  void testFindall() {
+  void testFindAll() {
     UUID hsmID = UUID.randomUUID();
     UUID wuaID = UUID.randomUUID();
     int i;
-    for(i = 0; i<2; i++) {
-      AttestationEntity entity = new AttestationEntity(hsmID, wuaID, String.valueOf(i));
+    for (i = 0; i < 2; i++) {
+      AttestationEntity entity =
+          new AttestationEntity(hsmID, wuaID, String.valueOf(i), Instant.now());
       repository.save(entity);
     }
     entityManager.flush();
     entityManager.clear();
-    List<AttestationDto> dtos =  repository.findAllByHsmId(hsmID);
-    assertThat(dtos.size()).isEqualTo(2);
-
+    List<AttestationDto> dtos = repository.findAllByHsmId(hsmID);
+    assertThat(dtos)
+        .hasSize(2)
+        .allSatisfy(dto -> assertThat(dto.hsmId()).isEqualTo(hsmID));
   }
 }

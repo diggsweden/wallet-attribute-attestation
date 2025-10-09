@@ -11,17 +11,13 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import jakarta.persistence.Transient;
 import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.ZoneOffset;
+import java.util.Objects;
 import java.util.UUID;
 
 @Entity
 @Table(name = "attestations")
 public class AttestationEntity {
-
   @Id
   @GeneratedValue(strategy = GenerationType.UUID)
   private UUID id;
@@ -34,14 +30,12 @@ public class AttestationEntity {
   @Column(name = "created")
   private Instant created;
 
-  public AttestationEntity() {
-    this.created = Instant.now();
-  }
+  public AttestationEntity() {}
 
-  public AttestationEntity(UUID hsmId, UUID wuaId, String attestationData) {
+  public AttestationEntity(UUID hsmId, UUID wuaId, String attestationData, Instant created) {
     this.hsmId = hsmId;
     this.wuaId = wuaId;
-    this.created = Instant.now();
+    this.created = created;
     this.attestationData = attestationData;
   }
 
@@ -85,16 +79,30 @@ public class AttestationEntity {
     this.created = timestamp;
   }
 
-  @Transient
-  public LocalDateTime getCreatedDateTime() {
-    return LocalDateTime.ofInstant(created, ZoneId.systemDefault());
+  @Override
+  public int hashCode() {
+    return Objects.hash(id, hsmId, wuaId, attestationData, created);
+
   }
 
-  @Transient
-  public void setCreatedDateTime(LocalDateTime localDateTime) {
-    this.created = localDateTime.toInstant(ZoneOffset.ofHours(1));
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj) {
+      return true;
+    }
+    if (obj == null) {
+      return false;
+    }
+
+    if (getClass() != obj.getClass()) {
+      return false;
+    }
+
+    AttestationEntity other = (AttestationEntity) obj;
+    return Objects.equals(id, other.id)
+        && Objects.equals(hsmId, other.hsmId)
+        && Objects.equals(wuaId, other.wuaId)
+        && Objects.equals(other.attestationData, attestationData)
+        && Objects.equals(other.created, created);
   }
-
-
-
 }

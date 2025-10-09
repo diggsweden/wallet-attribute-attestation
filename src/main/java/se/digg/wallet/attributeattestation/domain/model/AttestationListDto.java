@@ -7,4 +7,5 @@ package se.digg.wallet.attributeattestation.domain.model;
 import java.util.List;
 import java.util.UUID;
 
-public record AttestationListDto(List<AttestationDto> attestations, UUID hsmId) {} 
+public record AttestationListDto(List<AttestationDto> attestations, UUID hsmId) {
+}

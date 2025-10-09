@@ -69,17 +69,16 @@ class AttestationControllerTest {
 
   @Test
   void attestations_returned_by_hsmId() throws Exception {
-    UUID hsmId =  UUID.randomUUID();
+    UUID hsmId = UUID.randomUUID();
     when(attestationService.getAttestationsByHsmId(hsmId)).thenReturn(
         Arrays.asList(
-          new AttestationDto(UUID.randomUUID(), hsmId, UUID.randomUUID(), "a string"),
-          new AttestationDto(UUID.randomUUID(), hsmId, UUID.randomUUID(), "a string")
-        ));
-      String path = String.format("/attestation/user/%s", hsmId);
-       mvc.perform(get(path))
-       .andExpect(status().isOk())
-       .andExpect(jsonPath("$.attestations", hasSize(2)))
-       .andExpect(jsonPath("$.attestations[0].hsmId", is(hsmId.toString())));      
+            new AttestationDto(UUID.randomUUID(), hsmId, UUID.randomUUID(), "a string"),
+            new AttestationDto(UUID.randomUUID(), hsmId, UUID.randomUUID(), "a string")));
+    String path = String.format("/attestation/user/%s", hsmId);
+    mvc.perform(get(path))
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$.attestations", hasSize(2)))
+        .andExpect(jsonPath("$.attestations[0].hsmId", is(hsmId.toString())));
 
   }
 

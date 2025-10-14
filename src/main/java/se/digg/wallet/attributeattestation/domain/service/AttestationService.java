@@ -4,6 +4,7 @@
 
 package se.digg.wallet.attributeattestation.domain.service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import org.springframework.stereotype.Component;
@@ -17,19 +18,28 @@ import se.digg.wallet.attributeattestation.infrastructure.repostitory.Attestatio
 public class AttestationService {
 
   private final AttestationRepository attestationRepository;
+  private final AttestationEntityMapper attestationEntityMapper;
 
-  public AttestationService(AttestationRepository attestationRepository) {
+
+  public AttestationService(
+      AttestationRepository attestationRepository,
+      AttestationEntityMapper attestationEntityMapper) {
     this.attestationRepository = attestationRepository;
+    this.attestationEntityMapper = attestationEntityMapper;
   }
 
   public Optional<AttestationDto> getAttestationById(UUID uuid) {
     return attestationRepository.findById(uuid)
-        .map(AttestationEntityMapper::toDomain);
+        .map(attestationEntityMapper::toDomain);
+  }
+
+  public List<AttestationDto> getAttestationsByHsmId(UUID uuid) {
+    return attestationRepository.findAllByHsmId(uuid);
   }
 
   public AttestationDto createAttestation(CreateAttestationRequestDto attestationRequestDto) {
     AttestationEntity save =
-        attestationRepository.save(AttestationEntityMapper.toEntity(attestationRequestDto));
-    return AttestationEntityMapper.toDomain(save);
+        attestationRepository.save(attestationEntityMapper.toEntity(attestationRequestDto));
+    return attestationEntityMapper.toDomain(save);
   }
 }

@@ -9,7 +9,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.hamcrest.Matchers.*;
 
+import java.util.Arrays;
 import java.util.Optional;
 import java.util.UUID;
 import org.junit.jupiter.api.Test;
@@ -57,12 +59,27 @@ class AttestationControllerTest {
   void attestation_returned_for_existing_attestation() throws Exception {
     UUID uuid = UUID.randomUUID();
     when(attestationService.getAttestationById(uuid)).thenReturn(
-        Optional.of(new AttestationDto(uuid, UUID.randomUUID(), UUID.randomUUID())));
+        Optional.of(new AttestationDto(uuid, UUID.randomUUID(), UUID.randomUUID(), "a string")));
     String path = String.format("/attestation/%s", uuid);
 
     mvc.perform(get(path)).andExpect(status().isOk())
         .andExpect(jsonPath("$.id").value(uuid.toString()))
         .andExpect(content().contentType("application/json"));
+  }
+
+  @Test
+  void attestations_returned_by_hsmId() throws Exception {
+    UUID hsmId = UUID.randomUUID();
+    when(attestationService.getAttestationsByHsmId(hsmId)).thenReturn(
+        Arrays.asList(
+            new AttestationDto(UUID.randomUUID(), hsmId, UUID.randomUUID(), "a string"),
+            new AttestationDto(UUID.randomUUID(), hsmId, UUID.randomUUID(), "a string")));
+    String path = String.format("/attestation/user/%s", hsmId);
+    mvc.perform(get(path))
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$.attestations", hasSize(2)))
+        .andExpect(jsonPath("$.attestations[0].hsmId", is(hsmId.toString())));
+
   }
 
 }

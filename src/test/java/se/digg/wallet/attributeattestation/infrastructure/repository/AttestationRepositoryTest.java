@@ -2,7 +2,7 @@
 //
 // SPDX-License-Identifier: EUPL-1.2
 
-package se.digg.wallet.attributeattestation.infrastructure.repostitory;
+package se.digg.wallet.attributeattestation.infrastructure.repository;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -22,6 +22,7 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 import se.digg.wallet.attributeattestation.SharedPostgresContainer;
 import se.digg.wallet.attributeattestation.domain.model.AttestationDto;
 import se.digg.wallet.attributeattestation.infrastructure.model.AttestationEntity;
+import se.digg.wallet.attributeattestation.infrastructure.repostitory.AttestationRepository;
 
 @DataJpaTest
 @Testcontainers

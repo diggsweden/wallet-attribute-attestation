@@ -9,11 +9,16 @@ path = [
   ".github/pull_request_template.md",
   "renovate.json",
   "CHANGELOG.md",
- "docs/DEVELOPMENT.md",
+  "docs/DEVELOPMENT.md",
   "jreleaser.yml",
   ".mvn/settings.xml",
   "**/*/pmd_default_java.xml",
   "README.md",
+  "CODE_OF_CONDUCT.md",
+  "GOVERNANCE.md",
+  "SECURITY.md",
+  "CONTRIBUTING.md",
+  "DEVELOPMENT.md",
 ]
 precedence = "aggregate"
 SPDX-FileCopyrightText = "2025 Digg - Agency for Digital Government"

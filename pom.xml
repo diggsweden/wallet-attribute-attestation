@@ -64,6 +64,8 @@
     <maven-checkstyle-plugin.version>3.6.0</maven-checkstyle-plugin.version>
     <checkstyle.version>10.25.0</checkstyle.version>
     <record-builder.version>47</record-builder.version>
+    <maven-pmd-plugin.version>3.27.0</maven-pmd-plugin.version>
+    <spotbugs-maven-plugin.version>4.9.3.0</spotbugs-maven-plugin.version>
   </properties>
 
   <dependencies>
@@ -237,6 +239,33 @@
             </goals>
           </execution>
         </executions>
+      </plugin>
+
+      <!-- PMD plugin -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-pmd-plugin</artifactId>
+        <version>${maven-pmd-plugin.version}</version>
+        <configuration>
+          <rulesets>
+            <ruleset>${project.basedir}/development/sast/pmd_default_java.xml</ruleset>
+          </rulesets>
+          <failOnViolation>true</failOnViolation>
+          <printFailingErrors>true</printFailingErrors>
+          <linkXRef>false</linkXRef>
+        </configuration>
+      </plugin>
+
+      <!-- SpotBugs plugin -->
+      <plugin>
+        <groupId>com.github.spotbugs</groupId>
+        <artifactId>spotbugs-maven-plugin</artifactId>
+        <version>${spotbugs-maven-plugin.version}</version>
+        <configuration>
+          <effort>Max</effort>
+          <threshold>Low</threshold>
+          <failOnError>true</failOnError>
+        </configuration>
       </plugin>
     </plugins>
   </build>

@@ -4,7 +4,6 @@
 
 # Release Workflow for wallet-attribute-attestation
 # Maven application with container image publishing
----
 name: Release Workflow
 
 on:

@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -47,7 +46,7 @@ public class DefaultExceptionHandler {
     BadRequestDto body = new BadRequestDto(
         null,
         "Validation error",
-        HttpStatus.BAD_REQUEST.value(),
+        BAD_REQUEST.value(),
         getErrorsMap(e).toString(),
         instance);
     return ResponseEntity.badRequest().body(body);

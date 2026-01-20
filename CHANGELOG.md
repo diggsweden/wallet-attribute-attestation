@@ -5,11 +5,41 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.5] - 2026-01-18
+
+### Added
+
+- Add spotbugs exclude filter to suppress NM_METHOD_NAMING_CONVENTION errors
+
+### Changed
+
+- Update java non-major (#14)
+- Update github actions (#12)
+- Merge pull request #13 from diggsweden/fix/spotbugs-errors
+- Use reuseable ci 2.6.0
+- Change devbase-justkit name, improve dev doc
+- Update justfile and reuseable-ci
+- Update justfile and reuseableci
+- Pin sha and version
+- Use base renovate config
+- Adjust schedule
+
+### Fixed
+
+- Copy of List<AttestationDto> to avoid EI_EXPOSE_REP2 error
+- Correct lintwarnings for docs, checkstyle, container
+
+### Removed
+
+- Remove unnecessary import
+- Remove duplicate PMD rule
+
 ## [0.0.4] - 2025-10-15
 
 ### Added
 
 - Add new linebreak
+
 
 ## [0.0.3] - 2025-10-15
 
@@ -39,6 +69,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Fix old files and licensing
 
+[0.0.5]: https://github.com/diggsweden/wallet-attribute-attestation/compare/v0.0.4..v0.0.5
 [0.0.4]: https://github.com/diggsweden/wallet-attribute-attestation/compare/v0.0.3..v0.0.4
 [0.0.3]: https://github.com/diggsweden/wallet-attribute-attestation/compare/v0.0.2..v0.0.3
 

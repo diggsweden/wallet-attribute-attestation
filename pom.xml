@@ -16,7 +16,7 @@
   </parent>
   <groupId>se.digg.wallet</groupId>
   <artifactId>wallet-attribute-attestation</artifactId>
-  <version>0.0.4</version>
+  <version>0.0.5</version>
   <packaging>jar</packaging>
   <name>wallet-attribute-attestation</name>
   <description>Backend service for storing Attribute Attestations</description>

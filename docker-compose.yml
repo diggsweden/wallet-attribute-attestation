@@ -5,7 +5,7 @@ version: "3.8"
 
 services:
   postgres:
-    image: postgres:16-alpine
+    image: postgres:16-alpine@sha256:8ef47cb3d2582a664062404e8e578c5339a8df7f5df82ea1f1446c7b5d8cef15
     container_name: wallet-postgres
     environment:
       POSTGRES_PASSWORD: test

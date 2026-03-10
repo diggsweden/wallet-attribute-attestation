@@ -5,7 +5,36 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.0.5] - 2026-01-18
+## [0.0.6] - 2026-03-09
+
+### Added
+
+- Add no-op version control linter
+
+### Changed
+
+- Merge pull request #27 from diggsweden/fix/use-gommitlint
+- Use gommitlint
+- Merge pull request #26 from diggsweden/build/fail-on-dirty-working-tree
+- Enable version control linter
+- Update java non-major (#22)
+- Merge pull request #23 from diggsweden/fix/bump-hadolint-to-v2.14.0
+- Merge pull request #24 from diggsweden/chore/bump-reusable-ci-to-v2.6.1
+- Bump workflows to use reusable-ci v2.6.1
+- Update java non-major (#19)
+- Merge pull request #17 from diggsweden/renovate/actions-setup-java-5.x
+- Update actions/setup-java action to v5
+- Merge pull request #15 from diggsweden/renovate/actions-checkout-6.x
+- Update actions/checkout action to v6
+- Update dependency org.assertj:assertj-core to v3.27.7 [security] (#18)
+- Update dependency prettier to v3.8.1 (#16)
+- Pin dependencies (#9)
+
+### Fixed
+
+- Bump hadolint to v2.14.0
+
+## [0.0.5] - 2026-01-20
 
 ### Added
 
@@ -33,6 +62,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Remove unnecessary import
 - Remove duplicate PMD rule
+
 
 ## [0.0.4] - 2025-10-15
 
@@ -69,6 +99,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Fix old files and licensing
 
+[0.0.6]: https://github.com/diggsweden/wallet-attribute-attestation/compare/v0.0.5..v0.0.6
 [0.0.5]: https://github.com/diggsweden/wallet-attribute-attestation/compare/v0.0.4..v0.0.5
 [0.0.4]: https://github.com/diggsweden/wallet-attribute-attestation/compare/v0.0.3..v0.0.4
 [0.0.3]: https://github.com/diggsweden/wallet-attribute-attestation/compare/v0.0.2..v0.0.3

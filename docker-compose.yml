@@ -7,10 +7,16 @@ services:
   postgres:
     image: postgres:16-alpine
     container_name: wallet-postgres
+    read_only: true
+    security_opt:
+      - no-new-privileges:true
     environment:
       POSTGRES_PASSWORD: test
     ports:
       - "5432:5432"
+    tmpfs:
+      - /tmp
+      - /var/run/postgresql
     volumes:
       - postgres_data:/var/lib/postgresql/data
       # - ./config/init-db.sql:/docker-entrypoint-initdb.d/init-db.sql:ro

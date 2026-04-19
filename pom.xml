@@ -11,7 +11,7 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>3.5.11</version>
+    <version>3.5.13</version>
     <relativePath />
   </parent>
   <groupId>se.digg.wallet</groupId>
@@ -65,7 +65,7 @@
     <checkstyle.version>12.3.1</checkstyle.version>
     <record-builder.version>47</record-builder.version>
     <maven-pmd-plugin.version>3.28.0</maven-pmd-plugin.version>
-    <spotbugs-maven-plugin.version>4.9.8.2</spotbugs-maven-plugin.version>
+    <spotbugs-maven-plugin.version>4.9.8.3</spotbugs-maven-plugin.version>
   </properties>
 
   <dependencies>
@@ -88,7 +88,7 @@
     <dependency>
       <groupId>org.springdoc</groupId>
       <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-      <version>2.8.16</version>
+      <version>2.8.17</version>
     </dependency>
     <dependency>
       <groupId>io.micrometer</groupId>

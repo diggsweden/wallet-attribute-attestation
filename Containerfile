@@ -30,7 +30,7 @@ RUN ./mvnw clean package -DskipTests -Dcheckstyle.skip=true -B && \
     java -Djarmode=layertools -jar target/*.jar extract
 
 # Stage 2: Runtime stage
-FROM cgr.dev/chainguard/jre:latest@sha256:c4e02258ca54fcf0e0ea8b3cc5b9f0bcfa95fb2947ca280c9b529c88e992f8aa AS runtime
+FROM cgr.dev/chainguard/jre:latest@sha256:2799884f2d68e4264f0eeca10e4b1ae0189af677ae8d37c8a3a817e562fe6c97 AS runtime
 
 LABEL maintainer="Digg - Agency for Digital Government"
 LABEL description="Wallet Attribute Attestation"

@@ -13,11 +13,10 @@ spring:
       ddl-auto: none
   datasource:
     driverClassName: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/
-    username: wallet_attribute_attestation
+    url: jdbc:postgresql://localhost:5432/wallet-attribute-attestation
     role: postgres
-    user: wallet_attribute_attestation
-    password: postgres
+    username: wallet-attribute-attestation
+    password: pass
   liquibase:
     change-log: classpath:db/changelog/changelog-master.xml
   sql:

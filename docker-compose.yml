@@ -1,14 +1,14 @@
 # SPDX-FileCopyrightText: 2025 Digg - Agency for Digital Government
 # SPDX-License-Identifier: EUPL-1.2
 
-version: "3.8"
-
 services:
   postgres:
     image: postgres:16-alpine
     container_name: wallet-postgres
     environment:
-      POSTGRES_PASSWORD: test
+      POSTGRES_USER: wallet-attribute-attestation
+      POSTGRES_PASSWORD: pass
+      POSTGRES_DB: wallet-attribute-attestation
     ports:
       - "5432:5432"
     volumes:

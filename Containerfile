@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: EUPL-1.2
 
 # Stage 1: Build stage
-FROM docker.io/library/eclipse-temurin:21-jdk-alpine AS builder
+FROM docker.io/library/eclipse-temurin:25-jdk-alpine AS builder
 
 LABEL maintainer="Digg - Agency for Digital Government"
 LABEL description="Build stage for Attribute Attestation"
@@ -20,7 +20,7 @@ COPY mvnw pom.xml ./
 
 # Make mvnw executable and download dependencies (cached if pom.xml doesn't change)
 RUN chmod +x ./mvnw && \
-    ./mvnw dependency:resolve dependency:resolve-plugins -B
+    ./mvnw dependency:go-offline -B
 
 # Copy source code
 COPY src ./src
@@ -30,7 +30,7 @@ RUN ./mvnw clean package -DskipTests -Dcheckstyle.skip=true -B && \
     java -Djarmode=layertools -jar target/*.jar extract
 
 # Stage 2: Runtime stage
-FROM cgr.dev/chainguard/jre:latest@sha256:c4e02258ca54fcf0e0ea8b3cc5b9f0bcfa95fb2947ca280c9b529c88e992f8aa AS runtime
+FROM cgr.dev/chainguard/jre:latest@sha256:867928b6194d1feaf6803dc99e055f21f9de99258776e4060a86e483d6a472fb AS runtime
 
 LABEL maintainer="Digg - Agency for Digital Government"
 LABEL description="Wallet Attribute Attestation"

@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: EUPL-1.2
 
 # Stage 1: Build stage
-FROM docker.io/library/eclipse-temurin:25-jdk-alpine AS builder
+FROM docker.io/library/eclipse-temurin:26-jdk-alpine@sha256:67d858361411ee84a1510f560757b188a85349d62895767ea05dcf4fb0a9a285 AS builder
 
 LABEL maintainer="Digg - Agency for Digital Government"
 LABEL description="Build stage for Attribute Attestation"
